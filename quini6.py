@@ -21,7 +21,7 @@ wr = csv.writer(myfile, quoting=csv.QUOTE_ALL)
 
 before=datetime.datetime(year,1,1)
 after=datetime.datetime(year,12,31)
-rr = rrule.rrule(rrule.WEEKLY,byweekday=(relativedelta.SU,relativedelta.WE),dtstart=before)
+rr = rrule.rrule(rrule.WEEKLY,byweekday=(relativedelta.SU,relativedelta.TU,relativedelta.WE),dtstart=before)
 
 for d in  reversed(rr.between(before,after,inc=True)):	
    date = d.strftime("%d-%m-%Y")
