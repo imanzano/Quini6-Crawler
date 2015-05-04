@@ -5,6 +5,7 @@ import datetime
 import urllib2
 import json
 import csv
+import time
 
 parser = argparse.ArgumentParser(description='Process year and last lotery nro')
 parser.add_argument("apikey")
@@ -21,7 +22,7 @@ wr = csv.writer(myfile, quoting=csv.QUOTE_ALL)
 
 before=datetime.datetime(year,1,1)
 after=datetime.datetime(year,12,31)
-rr = rrule.rrule(rrule.WEEKLY,byweekday=(relativedelta.SU,relativedelta.TU,relativedelta.WE),dtstart=before)
+rr = rrule.rrule(rrule.WEEKLY,byweekday=(relativedelta.SU,relativedelta.WE,relativedelta.TU,relativedelta.TH,relativedelta.FR,relativedelta.SA,relativedelta.MO),dtstart=before)
 
 for d in  reversed(rr.between(before,after,inc=True)):	
    date = d.strftime("%d-%m-%Y")
@@ -36,5 +37,7 @@ for d in  reversed(rr.between(before,after,inc=True)):
 	   row.append(n)
          wr.writerow(row)
       nro=nro-1   
-   except Exception:
-      print "Error processing url. Skipped"
+   except Exception as ex:
+      print "Error processing url (%s). Skipped for %s" % (ex,date)
+   #just to follow kimonolabs's rate limits (https://help.kimonolabs.com/hc/en-us/articles/203307120-Understand-rate-limit-for-API-calls-)
+   time.sleep(0.9); 
