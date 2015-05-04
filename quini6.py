@@ -8,7 +8,6 @@ import csv
 
 parser = argparse.ArgumentParser(description='Process year and last lotery nro')
 parser.add_argument("apikey")
-parser.add_argument("",type=int)
 parser.add_argument("year",type=int)
 parser.add_argument("nro",type=int)
 args = parser.parse_args()
