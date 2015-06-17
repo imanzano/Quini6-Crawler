@@ -66,14 +66,5 @@ def main():
                 line = nro,date_str,quini_type[str(i)],n[0],n[1],n[2],n[3],n[4],n[5]
                 c.writerow(line)
      
-def test():
-    d0 = date(2007, 8, 18)
-    d1 = date(2006, 9, 26)
-    delta = d0 - d1
-    print time.strptime("15/01/2007",'%d/%m/%Y')
-    print date(2007,1,15)-timedelta(days=15)
-    '{0.day}/{0.month}/{0.year}'.format(date(2007,1,15)-timedelta(days=15))
-
 if __name__ == "__main__":
     main()
-    #test()
