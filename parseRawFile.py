@@ -36,7 +36,7 @@ def multiple_replace(dict, text):
 
 def main():
     parser = argparse.ArgumentParser(description = 'Export Quini6 numbers to CSV.')
-    parser.add_argument('-f', '--filename', help='File to parse.', required = True)
+    parser.add_argument('-p', '--path', help='Path with raw data files.', required = True)
     parser.add_argument('-o', '--output', help='CSV file containing nro,date,type,nr1,nr2,nr3,nr4,nr5,nr6.', required = True)
     args = vars(parser.parse_args())
     f = open( args['output'], 'wb')
