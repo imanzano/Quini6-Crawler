@@ -7,7 +7,7 @@ import re
 from datetime import date, timedelta,datetime
 
 
-csvheader = ("nro", "date","type","nr1","nr2","nr3","nr4","nr5","nr6")
+csvheader = ("nro", "date","type","nro")
 quini_type = {'4': 'T', '6': 'S', '8': 'R','10':'SS'}; 
  
 spanish_months = {
@@ -37,16 +37,16 @@ def multiple_replace(dict, text):
 def main():
     parser = argparse.ArgumentParser(description = 'Export Quini6 numbers to CSV.')
     parser.add_argument('-p', '--path', help='Path with raw data files.', required = True)
-    parser.add_argument('-o', '--output', help='CSV file containing nro,date,type,nr1,nr2,nr3,nr4,nr5,nr6.', required = True)
+    parser.add_argument('-o', '--output', help='CSV file containing card nro,date,type,number.', required = True)
     args = vars(parser.parse_args())
     f = open( args['output'], 'wb')
     c = csv.writer(f, delimiter = ';', quotechar = '"')
     
     c.writerow(csvheader)
     	
-    for f in os.listdir(args['filename']):    
-        print args['filename'] + '/'+ f
-        tree = html.parse(open(args['filename'] + '/'+ f, 'rb'))
+    for f in os.listdir(args['path']):    
+        print args['path'] + '/'+ f
+        tree = html.parse(open(args['path'] + '/'+ f, 'rb'))
         nro = tree.xpath('//*[@id="t_quini6"]/tbody/tr[2]/td/center/table/tbody/tr/td/font/b/text()')
         
         print nro
@@ -63,8 +63,9 @@ def main():
             for i in [4,6,8,10]:         
                 n = tree.xpath('//*[@id="t_quini6"]/tbody/tr['+str(i)+']/td/table/tbody/tr[1]/td[2]/div/font/b/text()')
                 n = n[0].replace(" ", "").split('-')
-                line = nro,date_str,quini_type[str(i)],n[0],n[1],n[2],n[3],n[4],n[5]
-                c.writerow(line)
+                for j in range(0,6):         
+                    line = nro,date_str,quini_type[str(i)],n[j]
+                    c.writerow(line)
      
 if __name__ == "__main__":
     main()
