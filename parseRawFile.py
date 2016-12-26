@@ -40,7 +40,12 @@ def main():
     parser.add_argument('-o', '--output', help='CSV file containing card nro,date,type,number.', required = True)
     args = vars(parser.parse_args())
     f = open( args['output'], 'wb')
+    f2 = open( "all.csv", 'wb')
+    
+
     c = csv.writer(f, delimiter = ';', quotechar = '"')
+
+    c2 = csv.writer(f2, delimiter = ';', quotechar = '"')
     
     #c.writerow(csvheader)
     	
@@ -67,7 +72,10 @@ def main():
                 odd =0
                 even =0
                 par = 0
-                for j in range(0,6):         
+                for j in range(0,6):     
+                    line = nro,date_str,quini_type[str(i)],n[j]
+                    c2.writerow(line)    
+
                     if ( int(n[j]) % 2 == 0):                        
                         even=even+1
                     else:
