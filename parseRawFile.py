@@ -39,13 +39,13 @@ def main():
     parser.add_argument('-p', '--path', help='Path with raw data files.', required = True)
     parser.add_argument('-o', '--output', help='CSV file containing card nro,date,type,number.', required = True)
     args = vars(parser.parse_args())
-    f = open( args['output'], 'wb')
-    f2 = open( "all.csv", 'wb')
+    f = open( args['output'], 'w')
+    f2 = open( "all.csv", 'w')
     
 
-    c = csv.writer(f, delimiter = ';', quotechar = '"')
+    c = csv.writer(f, delimiter = ',', quotechar = '"')
 
-    c2 = csv.writer(f2, delimiter = ';', quotechar = '"')
+    c2 = csv.writer(f2, delimiter = ',', quotechar = '"')
     
     #c.writerow(csvheader)
     	
@@ -53,7 +53,6 @@ def main():
         
         tree = html.parse(open(args['path'] + '/'+ f, 'rb'))
         nro = tree.xpath('//*[@id="t_quini6"]/tbody/tr[2]/td/center/table/tbody/tr/td/font/b/text()')
-        
         
         if len(nro):
            
