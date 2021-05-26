@@ -23,3 +23,12 @@ val cards = content.map(s=>s.split(";")).filter(s=>s(0)!="\"nro\"").map(
 
 cards.toDF().registerTempTable("cards")
 ```
+
+
+## Run
+In order to run these you need Python 3 installed along with the requirements
+(it is recommended to install these in a [virtualenv](https://virtualenv.pypa.io/en/stable/)):
+
+```bash
+pip install -r requirements.txt
+```
