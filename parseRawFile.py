@@ -59,13 +59,15 @@ def main():
             nro = nro[0].split(" ")[2].encode("utf-8")
 
             d = tree.xpath('//*[@id="t_quini6"]/tbody/tr[14]/td/font[2]/text()')     
-        
+            
 
             date = datetime.strptime(d[0],'%d/%m/%Y') - timedelta(days=15)
             date_str = '{0.day}/{0.month}/{0.year}'.format(date)
              
             for i in [4,6,8,10]:         
+                
                 n = tree.xpath('//*[@id="t_quini6"]/tbody/tr['+str(i)+']/td/table/tbody/tr[1]/td[2]/div/font/b/text()')
+                
                 n = n[0].replace(" ", "").split('-')
                 
                 odd =0
@@ -83,7 +85,7 @@ def main():
                     if (j<5) and (int(n[j])+1 == int(n[j+1])): 
                         par = par+1
 
-                line = nro,date_str,quini_type[str(i)], n[0],n[1],n[2],n[3],n[4],n[5],odd,even,par
+                line = nro,date.day,date.month, date.year,quini_type[str(i)], n[0],n[1],n[2],n[3],n[4],n[5],odd,even,par
                 c.writerow(line)
                     
      
